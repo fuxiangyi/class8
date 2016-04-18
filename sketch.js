@@ -32,7 +32,7 @@ function setup() {
     var canvas = createCanvas(windowWidth, windowHeight);
     button = createButton("");
     //give it an id in p5js
-    button.id('something'); //look for this in documentation of p5.js DOM
+    button.id('something');
     button.mousePressed(companyGoBack);
     button.size(20, 20);
 
@@ -53,15 +53,14 @@ function setup() {
 
     // read and translate the array to object
     for (var r = 0; r < table1.getRowCount(); r++) {
-        var comName = table1.getString(r, "company_name"); // get the data from csv file  p5.Table reference
+        var comName = table1.getString(r, "company_name");
         var InvName = table1.getString(r, "investor_name");
         var invested = table1.getString(r, "amount_usd");
         var time = table1.getString(r, "funded_at");
-        //time = parseInt(time);
-        invested = parseInt(invested); // convert string to int number
-        if (!isNaN(invested)) { // if invested is a number(if invested is not a NaN)
+        invested = parseInt(invested);
+        if (!isNaN(invested)) {
             if (aggregated.hasOwnProperty(comName)) {
-                aggregated[comName] = aggregated[comName] + invested; //create object of array =obj["company_name"] = string + string 
+                aggregated[comName] = aggregated[comName] + invested;
 
             } else {
                 aggregated[comName] = invested;
@@ -69,15 +68,13 @@ function setup() {
 
         }
         investorsAggregated[InvName] = time;
-
-
     }
 
 
 
     //lets put the object into a array
     var aAggregated = [];
-    Object.keys(aggregated).forEach(function (name) { //Object.keys(object array) return a array object
+    Object.keys(aggregated).forEach(function (name) {
         var company = {};
         company.name = name;
         company.sum = aggregated[name];
@@ -86,30 +83,29 @@ function setup() {
 
 
     var investors = [];
-    Object.keys(investorsAggregated).forEach(function (name) { //Object.keys(object array) return a array object
+    Object.keys(investorsAggregated).forEach(function (name) {
         var investor = {};
         investor.name = name;
         investor.time = investorsAggregated[name];
         investors.push(investor);
     });
-    console.log(investors);
+    //console.log(investors);
 
     // sort the array 
-    aAggregated.sort(function (a, b) { //array.sort -- comparason function -- number, string, object
-        return b.sum - a.sum; //sort desending order here   -- asending order a.sum - b.sum
+    aAggregated.sort(function (a, b) {
+        return b.sum - a.sum;
     });
 
     //narrow down the array to number of 100
     aAggregated = aAggregated.slice(0, 100);
-    console.log(aAggregated);   
-    //creat a new object array for connections between investor and company 
-    for (var r = 0; r < table1.getRowCount(); r++) { //second parse data
-        var comName = table1.getString(r, "company_name"); // get the data from csv file  p5.Table reference
+    //console.log(aAggregated);   
+
+    for (var r = 0; r < table1.getRowCount(); r++) {
+        var comName = table1.getString(r, "company_name");
         var InvName = table1.getString(r, "investor_name");
         var invested = table1.getString(r, "amount_usd");
         var time = table1.getString(r, "funded_at");
-        //time = parseInt(time);
-        invested = parseInt(invested); // convert string to int number
+        invested = parseInt(invested);
 
         var foundCompany = aAggregated.find(function (element, index, array) {            
             return element.name == comName;        
@@ -121,8 +117,8 @@ function setup() {
             });
             if (foundInvestor) {
                 var connection = {};
-                connection.company = foundCompany; //object from aAggregated  
-                connection.investor = foundInvestor; //object from investors
+                connection.company = foundCompany;
+                connection.investor = foundInvestor;
                 connection.amount = invested;
                 connection.time = time;
                 connections.push(connection);
@@ -136,9 +132,6 @@ function setup() {
 
 
 
-
-
-
     // setup the company particles
     for (var i = 0; i < aAggregated.length; i++) {
         var p = new Particles(aAggregated[i].name, aAggregated[i].sum);
@@ -146,18 +139,16 @@ function setup() {
         particleSystem.push(p);
 
     }
-    console.log(companyToDisplay);
+    // console.log(companyToDisplay);
 
 
 
     // setup investor particles
     for (var i = 0; i < connections.length; i++) {
         var p = new Investor(connections[i].investor.name, connections[i].amount, connections[i].time);
-        //print(p);
         connections[i].investor = p;
         investorsSystem.push(p);
-        //don't push 
-        //investorToDisplay.push(p);
+
     }
 
     // sort the connection array 
@@ -165,18 +156,10 @@ function setup() {
         if (a.time > b.time) return 1;
         else if (a.time == b.time) return 0;
         else if (a.time < b.time) return -1;
-        //array.sort -- comparason function -- number, string, object
-        //return b.time - a.time; //sort desending order here   -- asending order a.sum - b.sum
     });
 
-    /*connections.forEach(function(c){
-        c.investor = investorsSystem.find(function(iv){
-                    return iv.name == c.investor.name
-        });
-        
-    });*/
 
-    console.log(connections);
+    // console.log(connections);
 
 
     // setup the attractor to company 
@@ -211,7 +194,7 @@ function draw() {
                     ab.mult(-1);
                     pa.position.add(ab);
                     pa.vel.mult(0.97);
-                    pb.vel.mult(0.97); // this line decrease the particle's velocity everytime the particle collision
+                    pb.vel.mult(0.97);
 
                 }
             }
@@ -219,13 +202,18 @@ function draw() {
     }
 
 
-    //draw particles for companies;
+    if (companyToDisplay.length == 1) {
+        var p = companyToDisplay[0];
+        p.vel.mult(0.6);
+    }
+
+    //draw particles for companiess;
     companyToDisplay.forEach(function (d) {
         d.update();
         d.draw();
-
-
     })
+
+
 
 
 
@@ -265,8 +253,6 @@ function mouseClicked() {
     });
 
     if (particleClicked != null) {
-        //we can click on the company
-        //empty the companyToDisplayArray
         companyToDisplay = [];
         investorToDisplay = [];
         companyToDisplay.push(particleClicked);
@@ -291,9 +277,6 @@ function mouseClicked() {
         }
     });
 
-    //now we have the investorToDisplay populated with the right investors
-    //lets go through this array and change the positions of the particles
-
     var ang = -HALF_PI;
 
     investorToDisplay.forEach(function (p) {
@@ -302,7 +285,7 @@ function mouseClicked() {
         ang += TWO_PI / investorToDisplay.length;
     });
 
-    console.log(investorToDisplay);
+    //console.log(investorToDisplay);
 
 }
 
@@ -327,7 +310,7 @@ var Particles = function (name, sum) {
     if (rowCat != null) {
         this.category = rowCat.get("category_code");
     } else {
-        print(this.name);
+        //print(this.name);
         this.category = "other";
     }
 
@@ -380,9 +363,9 @@ var Particles = function (name, sum) {
 
     var tempAng = random(TWO_PI);
     this.position = createVector(cos(tempAng), sin(tempAng));
-    this.position.div(this.radius); //try to put bigger one near to the center --> if the radius is high the posistion is lower
+    this.position.div(this.radius);
     this.position.mult(1000);
-    this.position.set(this.position.x + (width / 3) * 2, this.position.y + height / 3); //create initial position and make it center. 
+    this.position.set(this.position.x + (width / 3) * 2, this.position.y + height / 3);
     this.vel = createVector(0, 0);
     var acc = createVector(0, 0);
 
@@ -390,7 +373,7 @@ var Particles = function (name, sum) {
         checkMouse(this);
 
         attractors.forEach(function (A) {
-            var att = p5.Vector.sub(A.getPos(), this.position); //if did not put this after the function(A), this here means A// 
+            var att = p5.Vector.sub(A.getPos(), this.position);
             var distanceSq = att.magSq();
             if (distanceSq > 10) {
                 att.normalize()
@@ -398,9 +381,9 @@ var Particles = function (name, sum) {
                 acc.add(att);
             }
         }, this);
-        this.vel.add(acc); //should add this.acceleration here! if use this.velocity here, the same with velocity
+        this.vel.add(acc);
         this.position.add(this.vel);
-        acc.mult(0); //reset the acceraltion      
+        acc.mult(0);
 
     }
 
@@ -429,7 +412,7 @@ var Particles = function (name, sum) {
 
 
 
-    function checkMouse(instance) { // this is a pravite function inside of particles function, 'this' is nor work here
+    function checkMouse(instance) {
         var mousePos = createVector(mouseX, mouseY);
         if (mousePos.dist(instance.position) <= instance.radius) {
             incRadius(instance);
@@ -489,7 +472,6 @@ var Investor = function (name, amount, time) {
 
     this.draw = function () {
 
-        //stroke(1);
         if (isMouseOver) {
 
             fill(100, 100, 120, 100)
@@ -516,7 +498,7 @@ var Investor = function (name, amount, time) {
     }
 
 
-    function checkMouse(instance) { // this is a pravite function inside of particles function, 'this' is nor work here
+    function checkMouse(instance) {
         var mousePos = createVector(mouseX, mouseY);
         if (mousePos.dist(instance.pos) <= instance.radius) {
             incRadius(instance);
@@ -564,10 +546,9 @@ var Spring = function (pa, pb, length) {
     }
 
     this.update = function () {
-        var delta = p5.Vector.sub(this.a.pos, this.b.pos); // create a vector from b to a
+        var delta = p5.Vector.sub(this.a.pos, this.b.pos);
         var dist = delta.mag();
-        //compare the ratio of dist and resLength
-        var disp = 1 - (this.resLength / dist); //so if the distance between the two particles is smaller than resLength, disp value would be "-"
+        var disp = 1 - (this.resLength / dist);
         delta.mult(disp * 0.5 * this.strength);
 
         this.a.pos.sub(delta);
@@ -589,7 +570,7 @@ var Attractor = function (position, s) {
     }
 
     this.getStrength = function () {
-        return strength; //strength here is a variable.
+        return strength;
     }
 
     this.getPos = function () {
