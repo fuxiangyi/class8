@@ -1,18 +1,52 @@
 <html>
+
 <head>
-  <!--meta information, resources, and libraries-should before the contents-->
-  <meta charset="UTF-8">
-  <link rel= "stylsheet" type = "text/css", herf = "style.css">
-  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
-  <!-- uncomment lines below to include extra p5 libraries -->
-  <script language="javascript" src="libraries/p5.dom.js"></script>
-  <script language="javascript" src="libraries/p5.sound.js"></script>
-  <script language="javascript" type="text/javascript" src="sketch.js"></script>
-  <!-- this line removes any default padding and style. you might only need one of these values set. -->
-  <style> body {padding: 0; margin: 0;} </style>
+    <!--meta information, resources, and libraries-should before the contents-->
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- this line removes any default padding and style. you might only need one of these values set. -->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
     <!-- contents go here-->
+    <div id="Title">Investments Clusters</div>
+    <div id="content">
+        <p>The CrunchBase Dataset <span class="tooltip">
+        <span class ="inside">
+     This is the “CrunchBase 2013 Snapshot” and was extracted from CrunchBase at 2013/12/12 
+<br>By using this data, you agree to follow the CrunchBase Terms of Service and Privacy Policy.  License to this data is described in the Terms of Service section referencing “Access to CrunchBase 2013 Snapshot”.
+        <br>  <a href ="http://info.crunchbase.com/docs/terms-of-service/">Terms of Service</a>
+        <br> <a href ="http://info.crunchbase.com/docs/privacy-policy/">Privacy Policy</a>
+    </span>
+            </span> is a structured set of data, text, and media files that include information about companies, products, people, investors and the activities that connect them together.</p>
+        <p><b style="color:grey">About this data visualization: </b> It shows companies and investors information before 2013. In this visualization, it only shows out the top 100 companies, which receives more investments than others. Color code represents the information about companies categories: <i style="color:rgb(211,60,71)">Ecommerce</i>, <i style="color:rgb(227,117,37)">Cleantech</i>, <i style="color:rgb(157,91,162)">Biotech</i>, <i style="color:rgb(102,175,198)">Web</i>, <i style="color:rgb(94,190,130)">Software</i>, <i style="color:rgb(48,67,155)">Mobile</i> and many <i style="color:rgb(205,193,197)">Others</i> . The size of a circle represent the total amout of investments the company got before 2013, "Clearwire" got the most investments according to the dataset report. </p>
+        <p>As to the interact function, when user hover over on a selected circle, more information relate to the selected company will show up, and every time user clicked on the circle, companies’ investors information will present. The size of the circle represents the amount of investor's finance during the time.</p>
+
+    </div>
+    <div id="ledgend">
+        <p><b>Ledgends</b></p>
+    </div>
+
+    <div id="backword"> Back</div>
+    <img id="image" src="assets/ledgend-01-01.png">
+    <img id="image2" src="assets/ledgend-02-01.png">
+
+
+
+
 </body>
+<script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+<!-- uncomment lines below to include extra p5 libraries -->
+<script language="javascript" src="libraries/p5.dom.js"></script>
+<script language="javascript" src="libraries/p5.sound.js"></script>
+<script language="javascript" type="text/javascript" src="sketch.js"></script>
+
 </html>

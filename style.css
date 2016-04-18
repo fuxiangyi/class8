@@ -1,4 +1,114 @@
-#canvas{
-    margin: auto,
-    display: block
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
+
+.canvas {
+    height: 100%;
+    position: relative;
+    margin-top: 0px;
+}
+
+#Title {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    font-size: 36px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#content {
+    position: absolute;
+    width: 33%;
+    left: 30px;
+    top: 80px;
+    font-size: 11px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#something {
+    position: absolute;
+    top: 65%;
+    left: 66%;
+    background-image: url(assets/arrow2.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+}
+
+#something:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+#something:hover {
+    opacity: 0.5;
+}
+
+#backword {
+    position: absolute;
+    top: 68%;
+    left: 66%;
+    font-size: 9px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#ledgend {
+    position: absolute;
+    width: 33%;
+    top: 54%;
+    left: 30px;
+    font-size: 11px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#image {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    top: 60%;
+    left: 30px;
+}
+
+#image2 {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    top: 60%;
+    left: 230px;
+}
+
+span.tooltip {
+    background-color: transparent;
+    width: 20px;
+    display: inline-block;
+    height: 20px;
+    margin-right: 1pt;
+    background-image: url(assets/information02.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+span.tooltip:hover > .inside {
+    display: block;
+    background-color: aliceblue;
+}
+
+span.tooltip .inside {
+    position: absolute;
+    display: none;
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+
+/*CSS3 extras*/
+
+
+/*a.tooltip span {
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #CCC;
+}*/
