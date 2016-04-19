@@ -48,14 +48,6 @@ body {
     opacity: 0.5;
 }
 
-#backword {
-    position: absolute;
-    top: 68%;
-    left: 66%;
-    font-size: 9px;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-}
-
 #ledgend {
     position: absolute;
     width: 33%;
@@ -83,9 +75,9 @@ body {
 
 span.tooltip {
     background-color: transparent;
-    width: 20px;
+    width: 10px;
     display: inline-block;
-    height: 20px;
+    height: 10px;
     margin-right: 1pt;
     background-image: url(assets/information02.png);
     background-repeat: no-repeat;

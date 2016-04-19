@@ -30,11 +30,6 @@ function setup() {
 
     //draw a button 
     var canvas = createCanvas(windowWidth, windowHeight);
-    button = createButton("");
-    //give it an id in p5js
-    button.id('something');
-    button.mousePressed(companyGoBack);
-    button.size(20, 20);
 
 
 
@@ -244,7 +239,11 @@ function windowResized() {
 
 //creat a mouse click event for companies
 function mouseClicked() {
-
+    button = createButton("");
+    //give it an id in p5js
+    button.id('something');
+    button.mousePressed(companyGoBack);
+    button.size(20, 20);
     var particleClicked = null;
     companyToDisplay.forEach(function (p) {
         if (p.getMouseOver()) {
@@ -256,6 +255,8 @@ function mouseClicked() {
         companyToDisplay = [];
         investorToDisplay = [];
         companyToDisplay.push(particleClicked);
+
+
     } else {
         companyToDisplay = [];
         investorToDisplay = [];
@@ -285,12 +286,14 @@ function mouseClicked() {
         ang += TWO_PI / investorToDisplay.length;
     });
 
+
     //console.log(investorToDisplay);
 
 }
 
 //creat a button for companytodisplay arrary to return 
 function companyGoBack() {
+    button.hide();
     companyToDisplay = [];
     investorToDisplay = [];
     particleSystem.forEach(function (p) {
